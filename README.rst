@@ -1,17 +1,17 @@
-rshell
+zishell
 =========
 
-Remote MicroPython shell.
+Remote Ziloo shell.
 
 This is a simple shell which runs on the host and uses MicroPython's
-raw-REPL to send python snippets to the pyboard in order to get
+raw-REPL to send python snippets to the Ziloo board in order to get
 filesystem information, and to copy files to and from MicroPython's
 filesystem.
 
-It also has the ability to invoke the regular REPL, so rshell can be
+It also has the ability to invoke the regular REPL, so zishell can be
 used as a terminal emulator as well.
 
-Note: With rshell you can disable USB Mass Storage and still copy files
+Note: With zishell you can disable USB Mass Storage and still copy files
 into and out of your pyboard.
 
 When using the commands, the /flash directory, and the /sdcard directory
@@ -19,7 +19,7 @@ When using the commands, the /flash directory, and the /sdcard directory
 other directories are considered to be on the host. For an ESP based board you
 can only reference its directory by using the board name e.g. /pyboard etc..
 
-NOTE: rshell requires a fairly recent version of the MicroPython
+NOTE: zishell requires a fairly recent version of the MicroPython
 firmware, specifically one which contains the ubinascii.unhexlify
 command which was added May 19, 2015 (v1.4.3-28-ga3a14b9 or newer).
 
@@ -28,19 +28,19 @@ error message something like this:
 
 ::
 
-    >./rshell.py
-    rshell needs MicroPython firmware with ubinascii.unhexlify
+    >./zishell.py
+    zishell needs MicroPython firmware with ubinascii.unhexlify
 
 Installation
 ============
 
-You can install rshell using the command:
+You can install zishell using the command:
 
 ::
 
-    sudo pip3 install rshell
+    sudo pip3 install zishell
 
-If you use a virtualenv, then you don't need the sudo. rshell needs Python3.
+If you use a virtualenv, then you don't need the sudo. zishell needs Python3.
 All of my testing was done using version 3.4.0.
 
 Debian/Ubuntu users can get pip3 using:
@@ -74,23 +74,23 @@ entering the repl and importing it.
 
 ::
 
-    >rshell
-    Welcome to rshell. Use Control-D to exit.
-    /home/dhylands/Dropbox/micropython/rshell> ls -l /flash
+    >zishell
+    Welcome to zishell. Use Control-D to exit.
+    /home/existentials/Dropbox/micropython/zishell> ls -l /flash
        529 May 21 17:34 README.txt
        286 May 21 17:34 boot.py
         34 May 21 17:34 main.py
       2436 May 21 17:34 pybcdc.inf
-    /home/dhylands/Dropbox/micropython/rshell> cp hello.py /flash
-    /home/dhylands/Dropbox/micropython/rshell> ls -l /flash
+    /home/existentials/Dropbox/micropython/zishell> cp hello.py /flash
+    /home/existentials/Dropbox/micropython/zishell> ls -l /flash
        529 May 21 17:34 README.txt
        286 May 21 17:34 boot.py
         21 May 21 17:35 hello.py
         34 May 21 17:34 main.py
       2436 May 21 17:34 pybcdc.inf
-    /home/dhylands/Dropbox/micropython/rshell> cat /flash/hello.py
+    /home/existentials/Dropbox/micropython/zishell> cat /flash/hello.py
     print('Hello World')
-    /home/dhylands/Dropbox/micropython/rshell> repl
+    /home/existentials/Dropbox/micropython/zishell> repl
     Entering REPL. Use Control-X to exit.
 
     Micro Python v1.4.3-28-ga3a14b9 on 2015-05-21; PYBv1.0 with STM32F405RG
@@ -99,7 +99,7 @@ entering the repl and importing it.
     >>> import hello
     Hello World
     >>>
-    /home/dhylands/Dropbox/micropython/rshell>
+    /home/existentials/Dropbox/micropython/zishell>
 
 Command Line Options
 ====================
@@ -112,9 +112,9 @@ following displayed:
 
 ::
 
-    usage: rshell [options] [command]
+    usage: zishell [options] [command]
 
-    Remote Shell for a MicroPython board.
+    Remote Shell for Ziloo board.
 
     positional arguments:
       cmd                   Optional command to execute
@@ -141,15 +141,15 @@ following displayed:
       --timing              Print timing information about each command
       --quiet               Turns off some output (useful for testing)
 
-    You can specify the default serial port using the RSHELL_PORT environment
+    You can specify the default serial port using the ZISHELL_PORT environment
     variable.
 
 -b BAUD, --baud BAUD
 --------------------
 
 Sets the baud rate to use when talking to the pyboard over a serial port. If
-no baud is specified, then the baudrate from the RSHELL_BAUD environment
-variable is used. If the RSHELL_BAUD environment variable is not defined then
+no baud is specified, then the baudrate from the ZISHELL_BAUD environment
+variable is used. If the ZISHELL_BAUD environment variable is not defined then
 the default baudrate of 115200 is used.
 
 --buffer-size
@@ -157,7 +157,7 @@ the default baudrate of 115200 is used.
 
 Sets the buffer size used when transferring files between the host and the
 pyboard. If no buffer size is specified, then the value from the
-RSHELL_BUFFER_SIZE environment variable is used. If the RSHELL_BUFFER_SIZE
+ZISHELL_BUFFER_SIZE environment variable is used. If the ZISHELL_BUFFER_SIZE
 environment variable is not defined, then the default of 512 is used.
 
 -d, --debug
@@ -170,20 +170,20 @@ the raw REPL and the response received.
 -------------------
 
 Specifies the editor to use with the edit command. If no editor is specified,
-then the following environment variables will be searched: RSHELL_EDITOR,
+then the following environment variables will be searched: ZISHELL_EDITOR,
 VISUAL, and EDITOR. If none of those environment variables is set then vi will
 be used.
 
 -f FILENAME, --file FILENAME
 ----------------------------
 
-Specifies a file of rshell commands to process. This allows you to
-create a script which executes any valid rshell commands.
+Specifies a file of zishell commands to process. This allows you to
+create a script which executes any valid zishell commands.
 
 -n, --nocolor
 -------------
 
-By default, rshell uses ANSI color escape codes when displaying the
+By default, zishell uses ANSI color escape codes when displaying the
 prompt and ls output. This option allows colorized output to be
 disabled.
 
@@ -197,7 +197,7 @@ to such platforms. It does this by encoding the data as ASCII hex.
 --wait
 ------
 
-If a port is specified defines how long rshell will wait for the port to exist
+If a port is specified defines how long zishell will wait for the port to exist
 and for a connection to be established. The default is 0 seconds specifying an
 immediate return.
 
@@ -205,7 +205,7 @@ immediate return.
 --------------------
 
 Specifies the serial port which should be used to talk to the
-MicroPython board. You can set the RSHELL\_PORT environment variable to
+MicroPython board. You can set the ZISHELL\_PORT environment variable to
 specify the default port to be used, if --port is not specified on the
 command line.
 
@@ -213,57 +213,57 @@ command line.
 ----------------------
 
 Sets the state of the DTR line when opening the serial port. This may
-also be defaulted from the RSHELL_DTR environment variable.
+also be defaulted from the ZISHELL_DTR environment variable.
 
 --rts [0|1|True|False]
 ----------------------
 
 Sets the state of the RTS line when opening the serial port. This may
-also be defaulted from the RSHELL_RTS environment variable.
+also be defaulted from the ZISHELL_RTS environment variable.
 
 --quiet
 -------
 
-This option causes the Connecting messages printed when rshell starts to be
+This option causes the Connecting messages printed when zishell starts to be
 suppressed. This is mostly useful for the test scripts.
 
 --timing
 --------
 
-If the timing option is specified then rshell will print the amount of time
+If the timing option is specified then zishell will print the amount of time
 that each command takes to execute.
 
 -u USER, --user USER
 --------------------
 
 Specifies the username to use when logging into a WiPy over telnet. If no
-username is specified, then the username from the RSHELL_USER environment
-variable is used. If the RSHELL_USER environment variable doesn't exist
+username is specified, then the username from the ZISHELL_USER environment
+variable is used. If the ZISHELL_USER environment variable doesn't exist
 then the default username 'micro' is used.
 
 -w PASSWORD, --password PASSWORD
 --------------------------------
 
 Specified the password to use when logging into a WiPy over telnet. If no
-password is specified, then the password from the RSHELL_PASSWORD environment
-variable is used. If the RSHELL_PASSWORD environment variable doesn't exist
+password is specified, then the password from the ZISHELL_PASSWORD environment
+variable is used. If the ZISHELL_PASSWORD environment variable doesn't exist
 then the default password 'python' is used.
 
 cmd
 ---
 
-If a command is specified, then that command will be executed and rshell will
+If a command is specified, then that command will be executed and zishell will
 exit. Examples:
 
 ::
 
-    rshell cp somefile.py /flash
-    rshell repl ~ pyb.bootloader() ~
+    zishell cp somefile.py /flash
+    zishell repl ~ pyb.bootloader() ~
 
 File System
 ===========
 
-rshell can be connected to multiple pyboards simultaneously. If the
+zishell can be connected to multiple pyboards simultaneously. If the
 board module exists on the pyboard (i.e. a file named board.py somewhere
 in the module search path) and it contains an attribute called name
 (e.g. :code:`name = "myboard"`) then the pyboard will use that name. If the board
@@ -300,7 +300,7 @@ boards
 
     boards
 
-Lists all of the boards that rshell is currently connected to, their
+Lists all of the boards that zishell is currently connected to, their
 names, and the connection.
 
 You can give a custom name to a board with either copying over a :code:`board.py`
@@ -310,7 +310,7 @@ file or using the :code:`echo` command, e.g.
 
     echo name="myboard" > /pyboard/board.py
 
-(Remember to exit rshell and re-enter to see the change).
+(Remember to exit zishell and re-enter to see the change).
 
 cat
 ---
@@ -340,7 +340,7 @@ connect
     connect serial port [baud]
     connect telnet ip-address-or-name
 
-Connects a pyboard to rshell. rshell can be connected to multiple
+Connects a pyboard to zishell. zishell can be connected to multiple
 pyboards simultaneously.
 
 cp
@@ -399,8 +399,8 @@ editor and if any changes were made to the file, it copies it back to
 the pyboard.
 
 The editor which is used defaults to vi, but can be overridden using
-either the --editor command line option when rshell.py is invoked, or by
-using the RSHELL\_EDITOR, VISUAL or EDITOR environment variables (they
+either the --editor command line option when zishell.py is invoked, or by
+using the ZISHELL\_EDITOR, VISUAL or EDITOR environment variables (they
 are tried in the order listed).
 
 filesize
@@ -475,7 +475,7 @@ Enters into the regular REPL with the MicroPython board. Use Control-X
 to exit REPL mode and return the shell. It may take a second or two
 before the REPL exits.
 
-If you provide a board-name then rshell will connect to that board,
+If you provide a board-name then zishell will connect to that board,
 otherwise it will connect to the default board (first connected board).
 
 If you provide a tilde followed by a space (~ ) then anything after the
@@ -487,7 +487,7 @@ For example, you could use:
 
 ::
 
-    rshell.py repl ~ pyb.bootloader()~
+    zishell.py repl ~ pyb.bootloader()~
 
 and it will boot the pyboard into DFU.
 
@@ -496,7 +496,7 @@ by the ~ character (not the ; character):
 
 ::
 
-    rshell.py repl ~ import mymodule ~ mymodule.run()
+    zishell.py repl ~ import mymodule ~ mymodule.run()
 
 rm
 --
@@ -563,7 +563,7 @@ The shell command can also be abbreviated using the exclamation point.
     shell some-command
     !some-command
 
-This will invoke a command, and return back to rshell. Example:
+This will invoke a command, and return back to zishell. Example:
 
 ::
 
