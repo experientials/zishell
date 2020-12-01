@@ -3,7 +3,7 @@ from setuptools import setup
 
 import sys
 if sys.version_info < (3,4):
-    print('rshell requires Python 3.4 or newer.')
+    print('zishell requires Python 3.4 or newer.')
     sys.exit(1)
 
 from rshell.version import __version__
@@ -19,9 +19,9 @@ setup(
     author_email = 'dhylands@gmail.com',
     description = ('A remote shell for working with MicroPython boards.'),
     license = 'MIT',
-    keywords = 'micropython shell',
-    url = 'https://github.com/dhylands/rshell',
-    download_url = 'https://github.com/dhylands/rshell/tarball/v0.0.1',
+    keywords = 'Ziloo shell',
+    url = 'https://github.com/experientials/zishell',
+    download_url = 'https://github.com/experientials/zishell/tarball/v0.0.1',
     packages=['rshell', 'tests'],
     long_description=long_description,
     classifiers=[
@@ -44,8 +44,8 @@ setup(
     ],
     entry_points = {
         'console_scripts': [
-            'pyboard=rshell.pyboard:main',
-            'rshell=rshell.command_line:main'
+            'pyboard=zishell.pyboard:main',
+            'zishell=zishell.command_line:main'
         ],
     },
     extras_require={
