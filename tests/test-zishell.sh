@@ -2,9 +2,9 @@
 
 # set -x
 
-LOCAL_DIR="./rshell-test"
+LOCAL_DIR="./zishell-test"
 
-RSHELL_DIR=rshell
+RSHELL_DIR=zishell
 TESTS_DIR=tests
 
 #RSHELL="$(pwd)/${RSHELL_DIR}/main.py --quiet --nocolor"
@@ -62,7 +62,7 @@ EOF
     cmp_results file-1.txt file-ref.txt "echo redirection"
 
     ${RSHELL} "cat ${dirname}/file.txt > file-2.txt"
-    cmp_results file-2.txt file-ref.txt "rshell cat redirection"
+    cmp_results file-2.txt file-ref.txt "zishell cat redirection"
 
     ${RSHELL} cat ${dirname}/file.txt > file-3.txt
     cmp_results file-3.txt file-ref.txt "bash cat redirection"
@@ -161,7 +161,7 @@ test_dir ${LOCAL_DIR}
 echo
 ROOT_DIRS=$(${RSHELL} ls /pyboard)
 for root_dir in ${ROOT_DIRS}; do
-    test_dir /${root_dir}rshell-test
+    test_dir /${root_dir}zishell-test
 done
 rsync_test
 echo

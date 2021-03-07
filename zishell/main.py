@@ -11,18 +11,18 @@
 
 # from __future__ import print_function
 
-# To run rshell from the git repository, cd into the top level rshell directory
+# To run zishell from the git repository, cd into the top level zishell directory
 # and run:
-#   python3 -m rshell.main
+#   python3 -m zishell.main
 #
-# that sets things up so that the "from rshell.xxx" will import from the git
+# that sets things up so that the "from zishell.xxx" will import from the git
 # tree and not from some installed version.
 
 import sys
 try:
-    from rshell.getch import getch
-    from rshell.pyboard import Pyboard, PyboardError
-    from rshell.version import __version__
+    from zishell.getch import getch
+    from zishell.pyboard import Pyboard, PyboardError
+    from zishell.version import __version__
 except ImportError as err:
     print('sys.path =', sys.path)
     raise err
@@ -54,9 +54,9 @@ from serial.tools import list_ports
 import traceback
 
 if sys.platform == 'win32':
-    EXIT_STR = 'Use the exit command to exit rshell.'
+    EXIT_STR = 'Use the exit command to exit zishell.'
 else:
-    EXIT_STR = 'Use Control-D (or the exit command) to exit rshell.'
+    EXIT_STR = 'Use Control-D (or the exit command) to exit zishell.'
 
 # I got the following from: http://www.farmckon.net/2009/08/rlcompleter-how-do-i-get-it-to-work/
 
@@ -1391,7 +1391,7 @@ class Device(object):
             unhexlify_exists = self.remote_eval(test_unhexlify)
             QUIET or print('Y' if unhexlify_exists else 'N')
             if not unhexlify_exists:
-                raise ShellError('rshell needs MicroPython firmware with ubinascii.unhexlify')
+                raise ShellError('zishell needs MicroPython firmware with ubinascii.unhexlify')
         QUIET or print('Retrieving root directories ... ', end='', flush=True)
         self.root_dirs = ['/{}/'.format(dir) for dir in self.remote_eval(listdir, '/')]
         QUIET or print(' '.join(self.root_dirs))
@@ -2026,7 +2026,7 @@ class Shell(cmd.Cmd):
     def do_boards(self, _):
         """boards
 
-           Lists the boards that rshell is currently connected to.
+           Lists the boards that zishell is currently connected to.
         """
         rows = []
         with DEV_LOCK:
@@ -2100,7 +2100,7 @@ class Shell(cmd.Cmd):
            connect serial port [baud]
            connect telnet ip-address-or-name
 
-           Connects a pyboard to rshell.
+           Connects a pyboard to zishell.
         """
         args = self.line_to_args(line)
         num_args = len(args)
@@ -2260,7 +2260,7 @@ class Shell(cmd.Cmd):
            back.
 
            You can specify the editor used with the --editor command line
-           option when you start rshell, or by using the VISUAL or EDITOR
+           option when you start zishell, or by using the VISUAL or EDITOR
            environment variable. if none of those are set, then vi will be used.
         """
         if len(line) == 0:
@@ -2295,7 +2295,7 @@ class Shell(cmd.Cmd):
     def do_exit(self, _):
         """exit
 
-           Exits from rshell.
+           Exits from zishell.
         """
         return True
 
@@ -2550,7 +2550,7 @@ class Shell(cmd.Cmd):
                         # then we don't have to call getch() above again which
                         # means we'd need to wait for another character.
                         time.sleep(0.5)
-                        # Print a newline so that the rshell prompt looks good.
+                        # Print a newline so that the zishell prompt looks good.
                         self.print('')
                         # We stay in the loop so that we can still enter
                         # characters until we detect the reader thread quitting
@@ -2650,7 +2650,7 @@ class Shell(cmd.Cmd):
 
            Launches a shell and executes whatever command you provide. If you
            don't provide any commands, then it will launch a bash sub-shell
-           and when exit from bash (Control-D) then it will return to rshell.
+           and when exit from bash (Control-D) then it will return to zishell.
         """
         if not line:
             line = '/bin/bash'
@@ -2736,7 +2736,7 @@ def real_main():
     except:
         default_buffer_size = BUFFER_SIZE
     parser = argparse.ArgumentParser(
-        prog="rshell",
+        prog="zishell",
         usage="%(prog)s [options] [command]",
         description="Remote Shell for a MicroPython board.",
         epilog=("You can specify the default serial port using the " +
@@ -2939,7 +2939,7 @@ def real_main():
     else:
         cmd_line = ' '.join(args.cmd)
         if cmd_line == '':
-            print('Welcome to rshell.', EXIT_STR)
+            print('Welcome to zishell.', EXIT_STR)
         if num_devices() == 0:
             print('')
             print('No MicroPython boards connected - use the connect command to add one')

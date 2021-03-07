@@ -28,8 +28,25 @@ error message something like this:
 
 ::
 
-    >./zishell.py
+    >python3 r.py
     zishell needs MicroPython firmware with ubinascii.unhexlify
+
+
+To test with a local board connected via USB
+
+::
+
+    > python3 r.py -p /dev/cu.usbserial-B152A71B470
+    Using buffer-size of 32
+    Connecting to /dev/cu.usbserial-B152A71B470 (buffer-size 32)...
+    Trying to connect to REPL  connected
+    Testing if ubinascii.unhexlify exists ... Y
+    Retrieving root directories ... /flash/
+    Setting time ... Mar 07, 2021 14:26:22
+    Evaluating board_name ... pyboard
+    Retrieving time epoch ... Jan 01, 2000
+    Welcome to zishell. Use Control-D (or the exit command) to exit zishell.
+
 
 Installation
 ============
@@ -53,7 +70,7 @@ Serial Port Permissions (linux)
 ===============================
 
 Under linux, the USB serial ports are owned by root and typically have a group of dialout (for ubuntu).
-Different unix distros may use a slightly different group name. In order for rshell (or any terminal emulator)
+Different unix distros may use a slightly different group name. In order for zishell (or any terminal emulator)
 to access the serial port, you'll need to ensure that your user account has sufficient priviledge.
 One way to do this is to ensure that your user is added to the dialout group, using a command like:
 

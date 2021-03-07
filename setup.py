@@ -6,23 +6,23 @@ if sys.version_info < (3,4):
     print('zishell requires Python 3.4 or newer.')
     sys.exit(1)
 
-from rshell.version import __version__
+from zishell.version import __version__
 
 here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name = 'rshell',
+    name = 'zishell',
     version = __version__,
-    author = 'Dave Hylands',
-    author_email = 'dhylands@gmail.com',
-    description = ('A remote shell for working with MicroPython boards.'),
+    author = 'Henrik Vendelbo',
+    author_email = 'hello@thepia.net',
+    description = ('A remote shell for working with Ziloo boards.'),
     license = 'MIT',
     keywords = 'Ziloo shell',
     url = 'https://github.com/experientials/zishell',
     download_url = 'https://github.com/experientials/zishell/tarball/v0.0.1',
-    packages=['rshell', 'tests'],
+    packages=['zishell', 'tests'],
     long_description=long_description,
     classifiers=[
         'Development Status :: 3 - Alpha',
